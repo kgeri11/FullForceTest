@@ -1,3 +1,4 @@
 export interface NavbarProps {
-  searchActive: boolean
+  page: string
+  handleNav: (page: string) => void
 }

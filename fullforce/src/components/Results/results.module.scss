@@ -1,0 +1,39 @@
+.container {
+  height: 100%;
+  width: 100%;
+
+  .sort {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .results {
+    height: 100%;
+    width: 100%;
+    padding: 15px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 20px;
+
+    .cardContainer {
+      width: 550px;
+      height: 150px;
+    }
+  }
+
+  .pagination {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
