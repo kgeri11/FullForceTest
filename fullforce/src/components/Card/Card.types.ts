@@ -5,4 +5,9 @@ export interface CardProps {
   description: string
   url: string
   picture: string
+  stars: string
+  watchers: string
+  forks: string
+  issues: string
+  created: string
 }

@@ -1,6 +1,8 @@
 import style from './results.module.scss'
 import Card from '../../components/Card'
 import { ResultsProps } from './Results.props'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const Results = ({
   onSortChange,
@@ -73,14 +75,29 @@ export const Results = ({
                 description={data?.description}
                 picture={data?.owner.avatar_url}
                 url={data?.html_url}
+                stars={data?.score}
+                watchers={data?.watchers}
+                forks={data?.forks}
+                issues={data?.open_issues}
+                created={data?.created_at}
               />
             </div>
           )
         })}
       </div>
       <div className={style.pagination}>
-        <div onClick={prevPage}>Previous</div>
-        <div onClick={nextPage}>Next</div>
+        <div
+          className={style.chevrons}
+          onClick={prevPage}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </div>
+        <div
+          className={style.chevrons}
+          onClick={nextPage}
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
+        </div>
       </div>
     </div>
   )

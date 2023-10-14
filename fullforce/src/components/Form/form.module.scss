@@ -1,9 +1,18 @@
 form {
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 50px 100px;
 
   .form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 40px;
+    margin-right: 30px;
+  }
+
+  .buttonContainer {
+    height: 30px;
+    width: 100px;
   }
 }

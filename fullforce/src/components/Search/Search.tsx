@@ -2,6 +2,8 @@ import style from './search.module.scss'
 import Form from '../../components/Form'
 import Results from '../../components/Results'
 import { SearchProps } from './Search.types'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Search = ({
   handleChange,
@@ -27,7 +29,9 @@ const Search = ({
         />
       </div>
       {isLoading ? (
-        'LOADINGLOADINGLOADINGLOADINGLOADINGLOADING'
+        <div className={style.loading}>
+          <FontAwesomeIcon icon={faSpinner} />
+        </div>
       ) : response ? (
         <Results
           data={response}

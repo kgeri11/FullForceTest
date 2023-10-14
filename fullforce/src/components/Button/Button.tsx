@@ -2,10 +2,10 @@ import React from 'react'
 import style from './button.module.scss'
 import { ButtonProps } from './Button.types'
 
-const Button = ({ label, onClick }: ButtonProps): React.ReactElement => {
+const Button = ({ label, type, onClick }: ButtonProps): React.ReactElement => {
   return (
     <button
-      type='button'
+      type={type}
       onClick={onClick}
       className={style.button}
     >

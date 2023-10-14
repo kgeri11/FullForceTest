@@ -1,3 +1,4 @@
+import Button from '../Button'
 import { FormProps } from './Form.types'
 import style from './form.module.scss'
 
@@ -60,8 +61,18 @@ export const Form = ({ onSubmit, onReset, onFieldChange }: FormProps): JSX.Eleme
           />
         </div>
       </div>
-      <button type='submit'>Search</button>
-      <button type='reset'>Reset</button>
+      <div className={style.buttonContainer}>
+        <Button
+          type='submit'
+          label='Search'
+        />
+      </div>
+      <div className={style.buttonContainer}>
+        <Button
+          type='reset'
+          label='Reset'
+        />
+      </div>
     </form>
   )
 }

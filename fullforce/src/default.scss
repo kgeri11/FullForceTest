@@ -5,15 +5,22 @@
   box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  :root {
-    scroll-behavior: smooth;
-  }
+:root {
+  scroll-behavior: smooth;
+  --color-light: #fff;
+  --color-medium: #b7b9c7;
+  --color-dark: #2e3040;
+  --bg-light: #f1efef;
+  --bg-greenish: #ccc8aa;
+  --bg-grey: #7d7c7c;
+  --bg-dark: #191717;
 }
 
 html,
 body,
 #root {
+  font-family: 'Fira Mono', sans-serif;
+  color: var(--bg-dark);
   padding: 0;
   margin: 0;
   width: 100%;
