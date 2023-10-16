@@ -3,20 +3,31 @@ import style from './main.module.scss'
 import Navbar from '../../components/Navbar'
 import { Octokit } from 'octokit'
 import Search from '../../components/Search'
-import { description } from '../../components/Card/card.module.scss'
+import { useDispatch } from 'react-redux'
+import { addResponse } from '../../features/responseSlice'
+import History from '../../components/History'
+import { addQuery } from '../../features/querySlice'
+import { useAppSelector } from '../../app/hooks'
 
 const Main = (): JSX.Element => {
   type sort = 'stars' | 'forks' | 'help-wanted-issues' | 'updated' | undefined
   type order = 'desc' | 'asc' | undefined
+  const dispatch = useDispatch()
+
+  const historyResponses = useAppSelector((state) => {
+    return [state.responseReducer.responses]
+  })
 
   const [page, setPage] = useState<string>('search')
   const [sortBy, setSortBy] = useState<string>('default')
   const [orderBy, setOrderBy] = useState<string>('desc')
+  const [activeHistorySearch, setActiveHistorySearch] = useState<number>()
   const [total, setTotal] = useState<number>(1)
   const [pagination, setPagination] = useState<number>(1)
   const [totalPages, setTotalPages] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [response, setResponse] = useState<any>()
+  const [activeHistoryResponse, setActiveHistoryResponse] = useState<any>()
   const [formData, setFormData] = useState({
     search: '',
     username: '',
@@ -36,11 +47,14 @@ const Main = (): JSX.Element => {
   }, [pagination])
 
   useEffect(() => {
-    console.log(isLoading)
-  }, [isLoading])
+    const activeResponse = historyResponses[0].find(({id}) => id === activeHistorySearch)
+    console.log(historyResponses[0])
+    console.log(activeResponse)
+    setActiveHistoryResponse(activeResponse)
+  }, [activeHistorySearch])
 
   const octokit = new Octokit({
-    auth: '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'
+    auth: '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'
   })
 
   const getRepos = (query: string, orderBy: order, sortBy: sort, page: number) => {
@@ -64,6 +78,14 @@ const Main = (): JSX.Element => {
           setTotalPages(parseInt(pageCalc.toString()))
           setTotal(data.total_count)
           setResponse(data.items)
+          dispatch(addResponse(data.items))
+          dispatch(
+            addQuery({
+              query: query,
+              orderBy: orderBy,
+              sortBy: sortBy
+            })
+          )
           setIsLoading(false)
         })
     } catch (error) {
@@ -90,7 +112,6 @@ const Main = (): JSX.Element => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    //TODO history to state
     getRepos(formData.search, orderBy as order, sortBy as sort, pagination)
   }
 
@@ -120,6 +141,11 @@ const Main = (): JSX.Element => {
     }
   }
 
+  const selectActiveSearch = (id: number) => {
+    console.log(id)
+    setActiveHistorySearch(id)
+  }
+
   return (
     <>
       <div className={style.container}>
@@ -144,7 +170,12 @@ const Main = (): JSX.Element => {
             nextPage={nextPage}
             prevPage={prevPage}
           />
-        ) : null}
+        ) : (
+          <History
+            selectActiveSearch={selectActiveSearch}
+            activeHistoryResponse={activeHistoryResponse}
+          />
+        )}
       </div>
     </>
   )

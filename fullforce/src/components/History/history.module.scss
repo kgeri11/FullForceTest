@@ -1,0 +1,42 @@
+.container {
+  width: 100%;
+  display: flex;
+
+  .historyContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    resize: horizontal;
+    overflow: scroll;
+    border: 1px solid var(--bg-dark);
+
+    .queryCard {
+      height: 100px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      border: 1px solid var(--bg-dark);
+      border-radius: 4px;
+    }
+  }
+  .responseContainer {
+    height: 100%;
+    width: 100%;
+    padding: 15px 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
+
+    .cardContainer {
+      width: 600px;
+      height: 150px;
+    }
+  }
+}
